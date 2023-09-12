@@ -323,3 +323,42 @@ class Solution9b {
     nums1.sort();
   }
 }
+
+class Solution9c {
+  void merge(List<int> nums1, int m, List<int> nums2, int n) {
+    final in1 = nums1.reversed.skip(nums1.length - m).iterator;
+    final in2 = nums2.reversed.iterator;
+    bool in1HasNext = in1.moveNext();
+    bool in2HasNext = in2.moveNext();
+
+    // don't need index check if i > 0 because
+    // nums1.length == in1.length + in2.length
+    // and merge is finished once in2 empty (in2HasNext)
+    for (var i = nums1.length - 1; in2HasNext; i--) {
+      if (in1HasNext && in1.current > in2.current) {
+        nums1[i] = in1.current;
+        in1HasNext = in1.moveNext();
+      } else {
+        nums1[i] = in2.current;
+        in2HasNext = in2.moveNext();
+      }
+    }
+  }
+}
+
+class Solution10 {
+  ListNode? deleteDuplicates(ListNode? head) {
+    if (head == null) {
+      return null;
+    }
+    var cur = head;
+    while (cur != null && cur.next != null) {
+      if (cur.val == cur.next!.val) {
+        cur.next = cur.next!.next;
+      } else {
+        cur = cur.next!;
+      }
+    }
+    return head;
+  }
+}

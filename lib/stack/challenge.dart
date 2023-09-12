@@ -5,9 +5,6 @@ void main() {
   challengeTwo();
 }
 
-/// Challenge 1: Reverse a List
-///
-/// Create a function that prints the contents of a list in reverse order.
 void challengeOne() {
   const list = ['d', 'r', 'a', 'w', 'e', 'r'];
   printInReverse(list);
@@ -27,14 +24,6 @@ void printInReverse<E>(List<E> list) {
   }
 }
 
-/// Challenge 2: Balance the Parentheses
-///
-/// Check for balanced parentheses. Given a string, check if there are `(`
-/// and `)` characters, and return `true` if the parentheses in the string
-/// are balanced. For example:
-///
-/// h((e))llo(world)()  // balanced parentheses
-/// (hello world        // unbalanced parentheses
 void challengeTwo() {
   print(areParenthesesBalanced('h((e))llo(world)()'));
   print(areParenthesesBalanced('(hello world'));
