@@ -374,3 +374,46 @@ class Solution11 {
     return slow;
   }
 }
+
+class TreeNode {
+  int val;
+  TreeNode? left;
+  TreeNode? right;
+  TreeNode([this.val = 0, this.left, this.right]);
+}
+
+class Solution12 {
+  int maxDepth(TreeNode? root) {
+    if (root == null) {
+      return 0;
+    }
+    var left = maxDepth(root.left);
+    var right = maxDepth(root.right);
+    return max(left, right) + 1;
+  }
+}
+
+class Solution12b {
+  int maxDepth(TreeNode? root) {
+    if (root == null) {
+      return 0;
+    }
+    Map<int, List<TreeNode?>> nodes = {
+      0: [root]
+    };
+    for (var i = 0; i < nodes.keys.length; i++) {
+      for (var j = 0; j < nodes[i]!.length; j++) {
+        if (nodes[i + 1] == null) {
+          nodes[i + 1] = [];
+        }
+        if (nodes[i]![j]?.left != null) {
+          nodes[i + 1]!.add(nodes[i]![j]?.left);
+        }
+        if (nodes[i]![j]?.right != null) {
+          nodes[i + 1]!.add(nodes[i]![j]?.right);
+        }
+      }
+    }
+    return nodes.keys.length - 1;
+  }
+}
