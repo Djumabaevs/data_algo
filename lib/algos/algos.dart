@@ -417,3 +417,19 @@ class Solution12b {
     return nodes.keys.length - 1;
   }
 }
+
+class Solution13 {
+  int cnt(TreeNode? nod) {
+    if (nod == null) return 0;
+    int l = cnt(nod.left);
+    if (l == -1) return -1;
+    int r = cnt(nod.right);
+    if (r == -1) return -1;
+    if ((r - l > 1) || (l - r > 1)) return -1;
+    return (l >= r ? l + 1 : r + 1);
+  }
+
+  bool isBalanced(TreeNode? root) {
+    return cnt(root) != -1;
+  }
+}
