@@ -433,3 +433,23 @@ class Solution13 {
     return cnt(root) != -1;
   }
 }
+
+class Solution14 {
+  double findMaxAverage(List<int> nums, int k) {
+    double maxAvg = -99999;
+    double sum = 0;
+    int i = 0;
+    int l = 0;
+    for (i = 0; i < nums.length; i++) {
+      sum += nums[i] / k;
+
+      if (i - l + 1 == k) {
+        maxAvg = max(maxAvg, sum);
+        sum -= nums[l] / k;
+        l++;
+      }
+    }
+
+    return maxAvg;
+  }
+}
