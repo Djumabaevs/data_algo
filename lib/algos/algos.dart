@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:math';
 
 class Solution {
@@ -488,5 +489,43 @@ class Solution15 {
     }
     missing = sum + duplicate;
     return [duplicate, missing];
+  }
+}
+
+class MyStack {
+  Queue<int> queue1 = Queue<int>();
+  Queue<int> queue2 = Queue<int>();
+
+  MyStack() {}
+
+  void push(int x) {
+    queue1.add(x);
+  }
+
+  int pop() {
+    while (queue1.length > 1) {
+      queue2.add(queue1.removeFirst());
+    }
+    int popped = queue1.removeFirst();
+    Queue<int> temp = queue1;
+    queue1 = queue2;
+    queue2 = temp;
+    return popped;
+  }
+
+  int top() {
+    while (queue1.length > 1) {
+      queue2.add(queue1.removeFirst());
+    }
+    int top = queue1.first;
+    queue2.add(queue1.removeFirst());
+    Queue<int> temp = queue1;
+    queue1 = queue2;
+    queue2 = temp;
+    return top;
+  }
+
+  bool empty() {
+    return queue1.isEmpty && queue2.isEmpty;
   }
 }
