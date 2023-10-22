@@ -1,10 +1,18 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
+
 class MyHashMap<K, V> {
   List<_Bucket<K, V>> _buckets;
   int _size;
   int _count = 0;
   static const double _loadFactor = 0.7;
 
-  MyHashMap({int initialSize = 16}) : _size = initialSize {
+  MyHashMap({
+    required this._buckets,
+    required this._size,
+    required this._count,
+  }) : _size = initialSize {
     _buckets = List.generate(_size, (index) => _Bucket<K, V>());
   }
 
@@ -48,6 +56,57 @@ class MyHashMap<K, V> {
       }
     }
   }
+
+  MyHashMap<K, V> copyWith({
+    List<_Bucket<K, V>>? _buckets,
+    int? _size,
+    int? _count,
+  }) {
+    return MyHashMap<K, V>(
+      _buckets: _buckets ?? this._buckets,
+      _size: _size ?? this._size,
+      _count: _count ?? this._count,
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      '_buckets': _buckets.map((x) => x.toMap()).toList(),
+      '_size': _size,
+      '_count': _count,
+    };
+  }
+
+  factory MyHashMap.fromMap(Map<String, dynamic> map) {
+    return MyHashMap<K, V>(
+      _buckets: List<_Bucket<K, V>>.from(
+          map['_buckets']?.map((x) => _Bucket<K, V>.fromMap(x))),
+      _size: map['_size']?.toInt() ?? 0,
+      _count: map['_count']?.toInt() ?? 0,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory MyHashMap.fromJson(String source) =>
+      MyHashMap.fromMap(json.decode(source));
+
+  @override
+  String toString() =>
+      'MyHashMap(_buckets: $_buckets, _size: $_size, _count: $_count)';
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is MyHashMap<K, V> &&
+        listEquals(other._buckets, _buckets) &&
+        other._size == _size &&
+        other._count == _count;
+  }
+
+  @override
+  int get hashCode => _buckets.hashCode ^ _size.hashCode ^ _count.hashCode;
 }
 
 class _Bucket<K, V> {
