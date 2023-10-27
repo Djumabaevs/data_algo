@@ -48,7 +48,6 @@ Map<String, int> groupImagingResultsByType(List<ImagingResult> imagingResults) {
   Map<String, int> groupedResults = {};
 
   for (var result in imagingResults) {
-    // Using a default value if displayName is null
     String displayName = result.imagingType.displayName ?? 'Unknown';
 
     if (groupedResults.containsKey(displayName)) {
