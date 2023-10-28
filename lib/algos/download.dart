@@ -1,5 +1,7 @@
 
-  static Future<void> downloadFilesFromUrl(
+  static import 'package:flutter/material.dart';
+
+Future<void> downloadFilesFromUrl(
     List<String> urls,
     BuildContext ctx,
   ) async {
