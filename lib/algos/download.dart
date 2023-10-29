@@ -5,7 +5,6 @@ Future<void> downloadFilesFromUrl(
     List<String> urls,
     BuildContext ctx,
   ) async {
-    // Added helper function to extract file extension from URL
     String getFileExtension(String url) {
       var uri = Uri.parse(url);
       var pathSegments = uri.pathSegments;
