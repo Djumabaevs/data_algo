@@ -567,3 +567,11 @@ class MyStack2 {
     return q.isEmpty;
   }
 }
+
+List<ClinicSubSummaryItem> displaySubItems = ([
+  ClinicSummaryFileType.bloodwork,
+  ClinicSummaryFileType.vaccinationRecords,
+  ClinicSummaryFileType.procedureNotes
+].contains(item))
+    ? []
+    : itemWrapper.subItems;
