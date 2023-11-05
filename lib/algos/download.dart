@@ -1,5 +1,4 @@
 
-  static import 'package:flutter/material.dart';
 
 Future<void> downloadFilesFromUrl(
     List<String> urls,
