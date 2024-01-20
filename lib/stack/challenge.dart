@@ -9,7 +9,7 @@ void challengeOne() {
   const list = ['d', 'r', 'a', 'w', 'e', 'r'];
   printInReverse(list);
 
-  print(list.reversed);
+  print(list.reversed) done
 }
 
 void printInReverse<E>(List<E> list) {
